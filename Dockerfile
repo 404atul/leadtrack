@@ -5,13 +5,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-cert
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-# `prisma generate` runs via postinstall here — Prisma resolves every env("...")
-# reference in schema.prisma at parse time for ANY command, so it needs
-# DATABASE_URL to at least be set (not necessarily valid/reachable) even though
-# generate never connects to a database. The real value comes from Coolify at
-# container runtime and overrides this.
+# `prisma generate` runs via postinstall here, so the schema must exist before
+# npm ci runs — otherwise Prisma fails immediately with "Could not find Prisma
+# Schema", regardless of base image or DATABASE_URL.
+COPY prisma ./prisma
+# Prisma also resolves every env("...") reference in schema.prisma at parse
+# time for ANY command, so DATABASE_URL needs to at least be set (not
+# necessarily valid/reachable) even though generate never connects to a
+# database. The real value comes from Coolify at container runtime and
+# overrides this.
 ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public"
-RUN npm ci
+# On failure, dump npm's debug log so the real error is visible in the build
+# log instead of just "exit code 1".
+RUN npm ci || (cat /root/.npm/_logs/*-debug-*.log 2>/dev/null; exit 1)
 
 FROM base AS builder
 WORKDIR /app
