@@ -1,15 +1,23 @@
-FROM node:24.20.0-alpine3.24 AS base
-RUN apk add --no-cache libc6-compat openssl
+FROM node:24.20.0-slim AS base
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
 
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
+# `prisma generate` runs via postinstall here — Prisma resolves every env("...")
+# reference in schema.prisma at parse time for ANY command, so it needs
+# DATABASE_URL to at least be set (not necessarily valid/reachable) even though
+# generate never connects to a database. The real value comes from Coolify at
+# container runtime and overrides this.
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public"
 RUN npm ci
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public"
 RUN npx prisma generate
 RUN npm run build
 
@@ -19,8 +27,8 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-RUN addgroup --system --gid 1001 nodejs \
-  && adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs \
+  && useradd --system --uid 1001 --gid nodejs nextjs
 
 # Standalone server + static assets — output tracing includes only the
 # production deps actually imported by the app (e.g. @prisma/client).
