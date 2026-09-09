@@ -44,9 +44,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # The `prisma` CLI is a devDependency never imported by app code, so output
 # tracing drops it. Copy it explicitly so docker-entrypoint.sh can run
-# `prisma migrate deploy` at container startup.
+# migrate deploy at container startup. Deliberately NOT copying
+# node_modules/.bin/prisma — that shim resolves via a relative path back into
+# node_modules/prisma/build/index.js, which cross-stage COPY was mangling;
+# docker-entrypoint.sh invokes that file directly instead.
 COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
-COPY --from=builder /app/node_modules/.bin/prisma ./node_modules/.bin/prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/prisma ./prisma
