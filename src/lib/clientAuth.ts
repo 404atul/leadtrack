@@ -1,13 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { isAgencyActive } from "@/lib/billing";
-import type { Client, Agency } from "@prisma/client";
+import type { Client } from "@prisma/client";
 
 export type ActiveClientSessionResult =
   | { status: "unauthenticated" }
-  | { status: "inactive" }
-  | { status: "ok"; clientId: string; client: Client & { agency: Agency } };
+  | { status: "ok"; clientId: string; client: Client };
 
 /**
  * Route-handler-safe equivalent of requireClientUser() — returns a result
@@ -22,11 +20,10 @@ export async function getActiveClientSession(): Promise<ActiveClientSessionResul
 
   const client = await prisma.client.findUnique({
     where: { id: session.user.clientId },
-    include: { agency: true },
   });
 
-  if (!client || !isAgencyActive(client.agency)) {
-    return { status: "inactive" };
+  if (!client) {
+    return { status: "unauthenticated" };
   }
 
   return { status: "ok", clientId: client.id, client };

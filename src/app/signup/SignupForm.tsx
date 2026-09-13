@@ -34,7 +34,7 @@ export default function SignupForm() {
         return;
       }
 
-      router.push("/admin/billing");
+      router.push("/admin/dashboard");
       router.refresh();
     } catch (err: any) {
       setError(err?.message ?? "Something went wrong.");

@@ -1,4 +1,4 @@
-import { Zap, RefreshCcw, LayoutDashboard, Users, ShieldCheck, CreditCard } from "lucide-react";
+import { Zap, RefreshCcw, LayoutDashboard, Users, ShieldCheck } from "lucide-react";
 
 const PLATFORM_CARDS = [
   {
@@ -44,11 +44,6 @@ const FEATURES = [
     icon: Zap,
     title: "Inline lead management",
     description: "Update status, quality, and assignment right from the leads table — no page reloads.",
-  },
-  {
-    icon: CreditCard,
-    title: "Built to bill",
-    description: "Stripe-powered subscriptions from day one, with a 14-day trial on every plan.",
   },
 ];
 

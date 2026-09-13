@@ -12,14 +12,6 @@ enum Role {
   client_user
 }
 
-enum SubscriptionStatus {
-  trialing
-  active
-  past_due
-  canceled
-  incomplete
-}
-
 enum Platform {
   meta
   google
@@ -42,17 +34,9 @@ enum LeadQuality {
 }
 
 model Agency {
-  id     String @id @default(cuid())
-  name   String
-  slug   String @unique
-
-  stripeCustomerId     String?             @unique
-  stripeSubscriptionId String?             @unique
-  stripePriceId        String?
-  subscriptionStatus   SubscriptionStatus  @default(trialing)
-  trialEndsAt          DateTime?
-  currentPeriodEndsAt  DateTime?
-
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
   createdAt DateTime @default(now())
 
   users   User[]

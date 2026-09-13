@@ -46,7 +46,7 @@ export async function signupAgency(formData: FormData) {
 
   await prisma.$transaction(async (tx) => {
     const agency = await tx.agency.create({
-      data: { name: agencyName, slug, subscriptionStatus: "incomplete" },
+      data: { name: agencyName, slug },
     });
     await tx.user.create({
       data: {

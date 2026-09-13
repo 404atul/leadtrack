@@ -11,7 +11,6 @@ async function main() {
       id: "agency-buildthegrowth",
       name: "BuildTheGrowth",
       slug: "buildthegrowth",
-      subscriptionStatus: "active",
     },
   });
 

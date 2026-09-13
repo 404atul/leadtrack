@@ -39,9 +39,6 @@ export async function GET(req: NextRequest) {
   if (result.status === "unauthenticated") {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  if (result.status === "inactive") {
-    return NextResponse.redirect(new URL("/account-paused", req.url));
-  }
   if (result.clientId !== statePayload.clientId) {
     return NextResponse.redirect(`${appUrl}/client/dashboard?google_error=session_mismatch`);
   }

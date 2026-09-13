@@ -26,7 +26,6 @@ async function main() {
       id: "agency-primary",
       name: "Admin",
       slug: "admin",
-      subscriptionStatus: "active",
     },
   });
 

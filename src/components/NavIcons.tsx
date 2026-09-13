@@ -41,20 +41,9 @@ function UsersIcon() {
   );
 }
 
-function CreditCardIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5">
-      <rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M2 8h16" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M5 12h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export const icons = {
   dashboard: <LayoutGridIcon />,
   clients: <BuildingIcon />,
   leads: <ListIcon />,
   users: <UsersIcon />,
-  billing: <CreditCardIcon />,
 };

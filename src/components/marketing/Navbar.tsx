@@ -31,9 +31,6 @@ export default function Navbar() {
           <a href="#how-it-works" className="font-satoshi text-sm text-white/70 transition-colors duration-200 hover:text-white">
             How it works
           </a>
-          <a href="#pricing" className="font-satoshi text-sm text-white/70 transition-colors duration-200 hover:text-white">
-            Pricing
-          </a>
         </div>
         <div className="flex items-center gap-3">
           <Link

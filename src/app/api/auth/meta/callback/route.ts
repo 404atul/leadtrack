@@ -43,9 +43,6 @@ export async function GET(req: NextRequest) {
   if (result.status === "unauthenticated") {
     return NextResponse.redirect(new URL("/login", req.url));
   }
-  if (result.status === "inactive") {
-    return NextResponse.redirect(new URL("/account-paused", req.url));
-  }
   if (result.clientId !== statePayload.clientId) {
     // Session doesn't match who initiated this OAuth flow — reject rather than
     // connecting Meta to the wrong client.
