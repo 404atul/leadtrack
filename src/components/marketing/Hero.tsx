@@ -1,10 +1,12 @@
 import Link from "next/link";
-import ShaderBackground from "@/components/ui/launch";
+import Tornado from "@/components/ui/tornado";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
-      <ShaderBackground />
+      <div className="absolute inset-0">
+        <Tornado />
+      </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black" />
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pt-24 text-center">
