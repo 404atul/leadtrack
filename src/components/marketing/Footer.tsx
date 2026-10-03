@@ -8,10 +8,7 @@ export default function Footer() {
         <p className="font-satoshi text-sm text-white/40">© {new Date().getFullYear()} LeadTrack CRM. All rights reserved.</p>
         <div className="flex gap-6">
           <Link href="/login" className="font-satoshi text-sm text-white/50 hover:text-white">
-            Sign in
-          </Link>
-          <Link href="/signup" className="font-satoshi text-sm text-white/50 hover:text-white">
-            Start free trial
+            Client Login
           </Link>
         </div>
       </div>

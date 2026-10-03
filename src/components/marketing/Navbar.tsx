@@ -35,15 +35,9 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/login"
-            className="font-satoshi hidden text-sm font-medium text-white/80 transition-colors duration-200 hover:text-white sm:block"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/signup"
             className="font-satoshi rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition-colors duration-200 hover:bg-white/90"
           >
-            Start free trial
+            Client Login
           </Link>
         </div>
       </nav>

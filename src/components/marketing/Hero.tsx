@@ -25,10 +25,10 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Link
-            href="/signup"
+            href="/login"
             className="font-satoshi w-full rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black transition-colors duration-200 hover:bg-white/90 sm:w-auto"
           >
-            Start your 14-day free trial
+            Client Login
           </Link>
           <a
             href="#how-it-works"
@@ -37,8 +37,6 @@ export default function Hero() {
             See how it works
           </a>
         </div>
-
-        <p className="font-satoshi mt-6 text-sm text-white/40">No credit card required to start.</p>
       </div>
     </section>
   );

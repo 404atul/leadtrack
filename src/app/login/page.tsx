@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { authOptions } from "@/lib/auth";
 import LoginForm from "./LoginForm";
 
@@ -21,12 +20,6 @@ export default async function LoginPage() {
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
           <LoginForm />
         </div>
-        <p className="mt-4 text-center text-sm text-gray-500">
-          Running an agency?{" "}
-          <Link href="/signup" className="font-medium text-brand-600 hover:text-brand-700">
-            Start a free trial
-          </Link>
-        </p>
       </div>
     </div>
   );

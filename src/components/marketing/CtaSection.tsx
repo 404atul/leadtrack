@@ -8,13 +8,13 @@ export default function CtaSection() {
           Stop losing leads between platforms.
         </h2>
         <p className="font-satoshi mt-4 text-lg text-white/60">
-          Set up your first client in under five minutes.
+          Every lead, one dashboard, zero spreadsheets.
         </p>
         <Link
-          href="/signup"
+          href="/login"
           className="font-satoshi mt-8 inline-block rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black transition-colors duration-200 hover:bg-white/90"
         >
-          Start your free trial
+          Client Login
         </Link>
       </div>
     </section>
