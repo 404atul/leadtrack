@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <Tornado />
+        <Tornado lineOptions={{ color: "#ff2222", glow: 28 }} dotOptions={{ color: "#ff5040", glow: 16 }} />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black" />
 
